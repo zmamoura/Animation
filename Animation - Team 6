@@ -1,0 +1,34 @@
+import os 
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+
+ph=os.path.expanduser('~/public_html/')
+
+fig, ax = plt.subplots()
+ax.axis([0,400,0,400])
+
+circle_point1, = ax.plot(3.4,4,'o', markerfacecolor='white', markeredgecolor='red', markersize=120, markeredgewidth =13, label = 'circle')
+circle_point2, = ax.plot(6.5,4,'o', markerfacecolor='white', markeredgecolor='yellow', markersize=120, markeredgewidth =13, label = 'circle')
+circle_point3, = ax.plot(8.2,5.6,'o', markerfacecolor='white', markeredgecolor='blue', markersize=120, markeredgewidth =13, label = 'circle')
+circle_point4, = ax.plot(2,5.6,'o', markerfacecolor='white', markeredgecolor='green', markersize=120, markeredgewidth =13, label = 'circle')
+circle_point5, = ax.plot(5.1,5.6,'o', markerfacecolor='white', markeredgecolor='black', markersize=120, markeredgewidth =13, label = 'circle')
+
+def init():
+ return (circle_point1,circle_point2,circle_point3,circle_point4,circle_point5)
+ 
+def animate(i):
+ circle_point1.set_data(56+i,i)
+ circle_point2.set_data(400-i,400-i)
+ circle_point3.set_data(344-i,i)
+ circle_point4.set_data(i,400-i)
+ circle_point5.set_data(200,i)
+
+ return (circle_point1,circle_point2,circle_point3,circle_point4,circle_point5)
+
+plt.text(290, 370,'RIO 2016', size='xx-large',color='crimson',backgroundcolor='palegoldenrod', style='italic', weight='bold' )
+
+
+ani=animation.FuncAnimation(fig, animate, np.arange(1, 265), 
+init_func=init, interval=35)
+ani.save("team6.mp4", fps=10)
